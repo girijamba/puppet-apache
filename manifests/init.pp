@@ -1,7 +1,7 @@
-# Class: apache
+# Class: ssh
 # ===========================
 #
-# Full description of class apache here.
+# Full description of class ssh here.
 #
 # Parameters
 # ----------
@@ -28,7 +28,7 @@
 # --------
 #
 # @example
-#    class { 'apache':
+#    class { 'ssh':
 #      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
 #    }
 #
@@ -42,7 +42,12 @@
 #
 # Copyright 2017 Your name here, unless otherwise noted.
 #
-class apache {
+class  apache(
+  String $package_name = $::apache::params::package_name,
+  String $service_name = $::apache::params::service_name,
 
+) inherits ::apache::params {
+  class { 'apache::install': } ->
+  class { 'apache::service': }
 
 }
